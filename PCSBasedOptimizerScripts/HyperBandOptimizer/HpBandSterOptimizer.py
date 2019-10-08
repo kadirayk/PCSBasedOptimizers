@@ -37,8 +37,10 @@ lines = f.readlines();
 for line in lines:
     if line.startswith("paramfile"):
         componentName = line.replace("paramfile = ", "")[:-5]
+    if line.startswith("gRPC_port"):
+        gRPC_port = line.replace("gRPC_port = ", "").strip()
 
-w = MyWorker(sleep_interval=0, component_name=componentName, nameserver='127.0.0.1', run_id='example1')
+w = MyWorker(sleep_interval=0, component_name=componentName, gRPC_port=gRPC_port, nameserver='127.0.0.1', run_id='example1')
 w.run(background=True)
 
 # Step 3: Run an optimizer

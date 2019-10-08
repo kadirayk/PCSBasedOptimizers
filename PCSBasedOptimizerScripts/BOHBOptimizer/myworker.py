@@ -14,11 +14,12 @@ import PCSBasedComponentParameter_pb2_grpc
 class MyWorker(Worker):
     component = ''
 
-    def __init__(self, *args, sleep_interval=0, component_name, **kwargs):
+    def __init__(self, *args, sleep_interval=0, component_name, gRPC_port, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.sleep_interval = sleep_interval
         self.component_name = component_name
+        self.gRPC_port = gRPC_port
         global component
         component = component_name
 
@@ -46,7 +47,7 @@ class MyWorker(Worker):
             param = PCSBasedComponentParameter_pb2.PCSBasedParameterProto(key=k, value=str(v))
             params.append(param)
 
-        channel = grpc.insecure_channel('localhost:8080')
+        channel = grpc.insecure_channel("localhost:" + str(self.gRPC_port))
         stub = PCSBasedComponentParameter_pb2_grpc.PCSBasedOptimizerServiceStub(channel)
 
         cmp = PCSBasedComponentParameter_pb2.PCSBasedComponentProto(name=self.component_name, parameters=params)

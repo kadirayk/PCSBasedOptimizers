@@ -15,6 +15,8 @@ if __name__ == '__main__':
     for line in lines:
         if line.startswith("paramfile"):
             componentName = line.replace("paramfile = ", "")[:-5]
+        if line.startswith("gRPC_port"):
+            gRPC_port = line.replace("gRPC_port = ", "").strip()
 
     params = []
 
@@ -23,7 +25,7 @@ if __name__ == '__main__':
                                                               value=sys.argv[i + 1])
         params.append(param)
 
-    channel = grpc.insecure_channel('localhost:8080')
+    channel = grpc.insecure_channel("localhost:" + gRPC_port)
     stub = PCSBasedComponentParameter_pb2_grpc.PCSBasedOptimizerServiceStub(channel)
 
     cmp = PCSBasedComponentParameter_pb2.PCSBasedComponentProto(name=componentName, parameters=params)
