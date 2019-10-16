@@ -14,7 +14,7 @@
 - Define requestedInterface and instantiate a PCSBasedOptimizerInput
 - Instantiate a ComponentInstanceEvaluator with WekaPipelineFactory and an arff file
 ```java
-ComponentLoader cl = new ComponentLoader(HASCOFileInput);
+ComponentLoader cl = new ComponentLoader("autoweka.json");
 Collection<Component> components = cl.getComponents();
 String requestedInterface = "BaseClassifier";
 PCSBasedOptimizerInput input = new PCSBasedOptimizerInput(components, requestedInterface);
