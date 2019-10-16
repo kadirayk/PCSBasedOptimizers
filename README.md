@@ -14,12 +14,12 @@
 - Define requestedInterface and instantiate a PCSBasedOptimizerInput
 - Instantiate a ComponentInstanceEvaluator with WekaPipelineFactory and an arff file
 ```java
-		ComponentLoader cl = new ComponentLoader(HASCOFileInput);
-		Collection<Component> components = cl.getComponents();
-		String requestedInterface = "BaseClassifier";
-		PCSBasedOptimizerInput input = new PCSBasedOptimizerInput(components, requestedInterface);
-		WekaPipelineFactory classifierFactory = new WekaPipelineFactory();
-		IObjectEvaluator<ComponentInstance, Double> evaluator = new ComponentInstanceEvaluator(classifierFactory, "testrsc/iris.arff");
+ComponentLoader cl = new ComponentLoader(HASCOFileInput);
+Collection<Component> components = cl.getComponents();
+String requestedInterface = "BaseClassifier";
+PCSBasedOptimizerInput input = new PCSBasedOptimizerInput(components, requestedInterface);
+WekaPipelineFactory classifierFactory = new WekaPipelineFactory();
+IObjectEvaluator<ComponentInstance, Double> evaluator = new ComponentInstanceEvaluator(classifierFactory, "testrsc/iris.arff");
 ```
 ### Generating PCS Files
 - Pass the input you instantiated above and give a destination folder for the generated PCS files
